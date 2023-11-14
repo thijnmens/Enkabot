@@ -6,7 +6,7 @@
 		"dev": "nodemon",
 		"dev:revolt": "yarn dev --revolt",
 		"dev:discord": "yarn dev --discord",
-		"build": "tsc",
+		"build": "tsc --build",
 		"prettier": "yarn prettier . --write --ignore unknown",
 		"prepare": "husky install"
 	},
