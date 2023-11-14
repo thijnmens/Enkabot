@@ -1,6 +1,8 @@
 import { Client, Message } from 'revolt.js';
 import Bot from '@Types/Bot';
 import * as console from 'console';
+import ICommand from '@Types/ICommand.ts';
+import Commands from '../Commands/Commands.ts';
 
 export default class RevoltBot implements Bot {
 	private client: Client;
@@ -39,16 +41,17 @@ export default class RevoltBot implements Bot {
 
 		switch (command.toLowerCase()) {
 			case 'ping':
-				message.reply('Pong!', true);
+				message.reply(Commands.Ping().message, true);
 				break;
 
 			case 'whoami':
+				let res: ICommand;
 				args.length > 0
-					? message.reply(args[0])
-					: message.reply(
+					? (res = Commands.WhoAmI(args[0]))
+					: (res = Commands.WhoAmI(
 							message.username || this.client.user!.username
-					  );
-
+					  ));
+				message.reply(res.message);
 				break;
 
 			default:
