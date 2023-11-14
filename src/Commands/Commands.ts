@@ -1,7 +1,7 @@
 import { Ping } from './Ping.ts';
-import { WhoAmI } from './WhoAmI.ts';
+import { UserInfo } from './UserInfo.ts';
 
 export default {
 	Ping,
-	WhoAmI,
+	UserInfo,
 };

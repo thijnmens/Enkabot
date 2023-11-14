@@ -1,8 +1,8 @@
-import RevoltBot from '@Revolt/Revolt.ts';
-import Bot from '@Types/Bot';
 import readline from 'readline';
 import process from 'process';
 import * as dotenv from 'dotenv';
+import RevoltBot from './Revolt/Revolt.ts';
+import Bot from '@Types/Bot.ts';
 
 dotenv.config();
 

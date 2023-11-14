@@ -1,8 +1,7 @@
 import { Client, Message } from 'revolt.js';
-import Bot from '@Types/Bot';
 import * as console from 'console';
-import ICommand from '@Types/ICommand.ts';
 import Commands from '../Commands/Commands.ts';
+import Bot from '@Types/Bot.ts';
 
 export default class RevoltBot implements Bot {
 	private client: Client;
@@ -40,22 +39,39 @@ export default class RevoltBot implements Bot {
 		const args: string[] = splitMessage.slice(1);
 
 		switch (command.toLowerCase()) {
+			/**
+			 *		Ping
+			 *		---
+			 *		Responds with `Pong!`, used to test if the bot is correctly recieving messages
+			 */
 			case 'ping':
-				message.reply(Commands.Ping().message, true);
+				message.reply(Commands.Ping().message, false);
 				break;
 
-			case 'whoami':
-				let res: ICommand;
-				args.length > 0
-					? (res = Commands.WhoAmI(args[0]))
-					: (res = Commands.WhoAmI(
-							message.username || this.client.user!.username
-					  ));
-				message.reply(res.message);
+			/**
+			 * 		Info [username]
+			 * 		---
+			 * 		Get enka info for a given username
+			 */
+			case 'info':
+				if (!RequiredArgs(1)) return;
+				Commands.UserInfo(args[0]).then(res =>
+					message.reply(res.message, false)
+				);
 				break;
 
 			default:
 				message.channel?.sendMessage(`Unknown command: ${command}`);
+		}
+
+		function RequiredArgs(amount: number): boolean {
+			if (args.length < amount) {
+				message.reply(
+					`Not enough args, required: ${amount}, provided: ${args.length}`
+				);
+				return false;
+			}
+			return true;
 		}
 	}
 }
