@@ -1,0 +1,30 @@
+{
+	"name": "enkabot",
+	"type": "module",
+	"packageManager": "yarn@4.0.2",
+	"scripts": {
+		"dev": "nodemon",
+		"dev:revolt": "yarn dev --revolt",
+		"dev:discord": "yarn dev --discord",
+		"build": "tsc",
+		"prettier": "yarn prettier . --write --ignore unknown",
+		"prepare": "husky install"
+	},
+	"dependencies": {
+		"dotenv": "^16.3.1",
+		"prompt-sync": "^4.2.0",
+		"revolt.js": "^6.0.20-patch.2",
+		"typescript": "^5.2.2"
+	},
+	"devDependencies": {
+		"@types/prompt-sync": "^4",
+		"husky": "^8.0.3",
+		"lint-staged": "^15.1.0",
+		"nodemon": "^3.0.1",
+		"prettier": "3.1.0",
+		"ts-node": "^10.9.1"
+	},
+	"lint-staged": {
+		"**/*": "prettier --write --ignore-unknown"
+	}
+}
